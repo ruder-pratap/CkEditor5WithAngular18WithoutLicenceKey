@@ -1,0 +1,192 @@
+/* ── Global Reset & Base ── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --font-sans: 'DM Sans', system-ui, sans-serif;
+  --font-mono: 'DM Mono', 'Courier New', monospace;
+  --bg: #f0ede6;
+  --surface: #ffffff;
+  --surface2: #f7f5f1;
+  --border: #e2ddd6;
+  --text: #1a1814;
+  --text2: #6b6760;
+  --text3: #a09c98;
+  --accent: #2d4a3e;
+  --accent-hover: #3d6454;
+  --accent-light: #e8f0ed;
+  --accent-text: #1d3229;
+  --danger: #8b2e2e;
+  --radius-sm: 4px;
+  --radius: 8px;
+  --radius-lg: 12px;
+  --topbar-h: 58px;
+  --sidebar-w: 210px;
+}
+
+html, body {
+  height: 100%;
+  font-family: var(--font-sans);
+  background: var(--bg);
+  color: var(--text);
+  font-size: 14px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── CKEditor Global Overrides ── */
+.ck.ck-editor {
+  border: none !important;
+  box-shadow: none !important;
+}
+
+.ck.ck-editor__top .ck-sticky-panel__content {
+  border: none !important;
+  box-shadow: none !important;
+}
+
+.ck.ck-toolbar {
+  background: var(--surface2) !important;
+  border: none !important;
+  border-bottom: 1px solid var(--border) !important;
+  border-radius: 0 !important;
+  padding: 5px 10px !important;
+  flex-wrap: wrap !important;
+}
+
+.ck.ck-toolbar .ck-toolbar__items {
+  flex-wrap: wrap !important;
+}
+
+.ck.ck-toolbar__line-break::before {
+  background: var(--border) !important;
+}
+
+.ck.ck-button {
+  border-radius: var(--radius-sm) !important;
+  color: var(--text) !important;
+  font-family: var(--font-sans) !important;
+  cursor: pointer !important;
+  transition: background 0.12s, color 0.12s !important;
+}
+
+.ck.ck-button:hover:not(.ck-disabled) {
+  background: var(--accent-light) !important;
+  color: var(--accent) !important;
+}
+
+.ck.ck-button.ck-on {
+  background: var(--accent-light) !important;
+  color: var(--accent) !important;
+}
+
+.ck.ck-toolbar__separator {
+  background: var(--border) !important;
+}
+
+/* Source editing button — highlighted style */
+.ck.ck-source-editing-button {
+  font-size: 11px !important;
+  font-weight: 500 !important;
+  padding: 4px 10px !important;
+  border: 1px solid var(--border) !important;
+  border-radius: var(--radius-sm) !important;
+  letter-spacing: 0.2px !important;
+}
+
+.ck.ck-source-editing-button.ck-on {
+  background: var(--accent) !important;
+  color: #fff !important;
+  border-color: var(--accent) !important;
+}
+
+/* Source editing textarea — dark code editor */
+.ck-source-editing-area {
+  border: none !important;
+}
+
+.ck-source-editing-area textarea {
+  background: #1c1e22 !important;
+  color: #abb2bf !important;
+  font-family: var(--font-mono) !important;
+  font-size: 13px !important;
+  line-height: 1.75 !important;
+  padding: 24px 32px !important;
+  min-height: 400px !important;
+  border: none !important;
+  outline: none !important;
+  tab-size: 2 !important;
+  resize: none !important;
+}
+
+/* Editable area */
+.ck.ck-editor__editable {
+  border: none !important;
+  box-shadow: none !important;
+  min-height: 420px !important;
+  padding: 28px 36px !important;
+  font-family: Georgia, 'Times New Roman', serif !important;
+  font-size: 15px !important;
+  line-height: 1.85 !important;
+  color: var(--text) !important;
+}
+
+.ck.ck-editor__editable:focus {
+  outline: none !important;
+  box-shadow: none !important;
+  border: none !important;
+}
+
+.ck.ck-editor__editable_inline {
+  border: none !important;
+}
+
+/* Dropdowns */
+.ck.ck-dropdown__panel {
+  border: 1px solid var(--border) !important;
+  border-radius: var(--radius) !important;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1) !important;
+}
+
+.ck.ck-list__item .ck-button:hover {
+  background: var(--accent-light) !important;
+  color: var(--accent) !important;
+}
+
+/* Balloon (link popup etc) */
+.ck.ck-balloon-panel {
+  border: 1px solid var(--border) !important;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.12) !important;
+  border-radius: var(--radius) !important;
+}
+
+/* Table toolbar */
+.ck.ck-widget__type-around__button {
+  border-radius: var(--radius-sm) !important;
+}
+
+/* Focus ring */
+.ck.ck-editor__editable.ck-focused {
+  border: none !important;
+  box-shadow: none !important;
+  outline: none !important;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text3);
+}

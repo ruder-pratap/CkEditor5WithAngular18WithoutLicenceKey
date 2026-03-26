@@ -1,0 +1,148 @@
+<div class="app-layout">
+
+  <!-- ── Top Bar ── -->
+  <header class="topbar">
+    <button class="topbar-menu-btn" (click)="toggleSidebar()" title="Toggle sidebar">
+      <span class="menu-icon"></span>
+      <span class="menu-icon"></span>
+      <span class="menu-icon"></span>
+    </button>
+
+    <div class="topbar-logo">
+      Writer<span class="topbar-logo-sub">5</span>
+    </div>
+
+    <div class="topbar-badge">CKEditor 5 · Superbuild v40 · Angular 18 · No Key</div>
+
+    <div class="topbar-spacer"></div>
+
+    <div class="topbar-save-info" [class.saving]="isSaving">
+      {{ isSaving ? 'Saving…' : lastSaved }}
+    </div>
+
+    <button class="btn-save" (click)="saveToStorage()">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+        <path d="M2 2h8l2 2v8H2V2z" stroke="currentColor" stroke-width="1.3"/>
+        <rect x="4" y="8" width="6" height="4" stroke="currentColor" stroke-width="1.3"/>
+        <rect x="4" y="2" width="5" height="3" stroke="currentColor" stroke-width="1.3"/>
+      </svg>
+      Save
+    </button>
+
+    <button class="btn-outline" (click)="exportHTML()">Export HTML</button>
+    <button class="btn-outline" (click)="onSubmit()">Get Data</button>
+  </header>
+
+  <div class="app-body">
+
+    <!-- ── Sidebar ── -->
+    <aside class="sidebar" [class.sidebar-closed]="!isSidebarOpen">
+      <div class="sidebar-inner">
+
+        <section class="sidebar-section">
+          <div class="sidebar-section-title">Documents</div>
+          <button class="sidebar-item active">
+            <span class="sidebar-dot"></span>
+            {{ form.get('title')?.value || 'Untitled' }}
+          </button>
+          <button class="sidebar-item" (click)="newDocument()">
+            <span class="sidebar-plus">+</span>
+            New document
+          </button>
+        </section>
+
+        <section class="sidebar-section">
+          <div class="sidebar-section-title">Templates</div>
+
+          <button class="sidebar-item" [class.active]="activeTemplate === 'article'" (click)="loadTemplate('article')">
+            <span class="sidebar-dot"></span>Article
+          </button>
+          <button class="sidebar-item" [class.active]="activeTemplate === 'report'" (click)="loadTemplate('report')">
+            <span class="sidebar-dot"></span>Report
+          </button>
+          <button class="sidebar-item" [class.active]="activeTemplate === 'letter'" (click)="loadTemplate('letter')">
+            <span class="sidebar-dot"></span>Formal letter
+          </button>
+          <button class="sidebar-item" [class.active]="activeTemplate === 'meeting'" (click)="loadTemplate('meeting')">
+            <span class="sidebar-dot"></span>Meeting notes
+          </button>
+          <button class="sidebar-item" [class.active]="activeTemplate === 'blank'" (click)="loadTemplate('blank')">
+            <span class="sidebar-dot"></span>Blank
+          </button>
+        </section>
+
+        <section class="sidebar-section sidebar-section--info">
+          <div class="sidebar-section-title">Source editing</div>
+          <p class="sidebar-tip">
+            Click the <code>&lt;/&gt; Source</code> button at the start of the toolbar to edit raw HTML directly in CKEditor.
+          </p>
+          <div class="sidebar-divider"></div>
+          <div class="sidebar-section-title">Build info</div>
+          <div class="sidebar-meta-row"><span>Package</span><span>ckeditor5-angular 8</span></div>
+          <div class="sidebar-meta-row"><span>Build</span><span>Superbuild</span></div>
+          <div class="sidebar-meta-row"><span>Version</span><span>v40.2.0</span></div>
+          <div class="sidebar-meta-row"><span>License</span><span>GPL 2+</span></div>
+          <div class="sidebar-meta-row"><span>Key needed</span><span class="badge-green">No</span></div>
+        </section>
+
+      </div>
+    </aside>
+
+    <!-- ── Main Content ── -->
+    <main class="main-content">
+      <form [formGroup]="form" (ngSubmit)="onSubmit()" class="editor-form">
+
+        <!-- Document Title -->
+        <div class="doc-title-row">
+          <input
+            formControlName="title"
+            class="doc-title-input"
+            type="text"
+            placeholder="Document title…"
+            autocomplete="off"
+          />
+          <div class="doc-stats-row">
+            <span class="stat-pill">
+              <strong>{{ wordCount }}</strong> words
+            </span>
+            <span class="stat-pill">
+              <strong>{{ charCount }}</strong> chars
+            </span>
+            <span class="stat-pill">
+              <strong>{{ paraCount }}</strong> paragraphs
+            </span>
+          </div>
+        </div>
+
+        <!-- CKEditor -->
+        <div class="editor-shell">
+          <ckeditor
+            [editor]="Editor"
+            [config]="editorConfig"
+            formControlName="content"
+            (ready)="onEditorReady($event)">
+          </ckeditor>
+        </div>
+
+        <!-- Form Actions -->
+        <div class="form-actions">
+          <div class="form-actions-left">
+            <button type="button" class="btn-secondary" (click)="newDocument()">
+              New document
+            </button>
+          </div>
+          <div class="form-actions-right">
+            <button type="button" class="btn-secondary" (click)="exportHTML()">
+              Export HTML
+            </button>
+            <button type="submit" class="btn-primary">
+              Get HTML Data
+            </button>
+          </div>
+        </div>
+
+      </form>
+    </main>
+
+  </div>
+</div>
