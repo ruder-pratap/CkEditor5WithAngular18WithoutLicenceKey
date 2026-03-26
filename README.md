@@ -1,0 +1,1 @@
+# CkEditor5WithAngular18WithoutLicenceKey
